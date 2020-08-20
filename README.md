@@ -1,4 +1,9 @@
-# bbbq_1
+# bbbq_1_fast
+
+Branch |[![Travis CI logo](pics/TravisCI.png)](https://travis-ci.org)                                                                             |[![Codecov logo](pics/Codecov.png)](https://www.codecov.io)
+-------|------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+master |[![Build Status](https://travis-ci.org/richelbilderbeek/bbbq_1_fast.svg?branch=master)](https://travis-ci.org/richelbilderbeek/bbbq_1_fast) |[![codecov.io](https://codecov.io/github/richelbilderbeek/bbbq_1_fast/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/bbbq_1_fast/branch/master)
+develop|[![Build Status](https://travis-ci.org/richelbilderbeek/bbbq_1_fast.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/bbbq_1_fast)|[![codecov.io](https://codecov.io/github/richelbilderbeek/bbbq_1_fast/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/bbbq_1_fast/branch/develop)
 
 The first sub-question of the Bianchi, Bilderbeek and Bogaart Question.
 
