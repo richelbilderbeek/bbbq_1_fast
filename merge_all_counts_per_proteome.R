@@ -22,7 +22,7 @@ for (i in seq_along(targets)) {
 
   for (haplotype_id in t_haplotype_lut$haplotype_id) {
     target_filename <- paste0(
-      target, "_", haplotype_id, "_", protein_id, "_counts.csv"
+      target, "_", haplotype_id, "_counts.csv"
     )
     if (!file.exists(target_filename)) {
       # message("Filename '", target_filename, "' absent. Ignore")
