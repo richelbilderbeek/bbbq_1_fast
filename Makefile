@@ -126,8 +126,13 @@ fig_f_tmh_mhc2.png: counts.csv
 #	Rscript -e 'rmarkdown::render("bbbq_1.Rmd")'
 
 update_packages:
+	Rscript -e 'remotes::install_github("richelbilderbeek/peregrine")'
 	Rscript -e 'remotes::install_github("richelbilderbeek/mhcnuggetsr")'
 	Rscript -e 'remotes::install_github("richelbilderbeek/mhcnpreds")'
+	Rscript -e 'remotes::install_github("jtextor/epitope-prediction")'
+	Rscript -e 'remotes::install_github("richelbilderbeek/epiprepreds")'
+	Rscript -e 'remotes::install_github("richelbilderbeek/netmhc2pan")'
+	Rscript -e 'remotes::install_github("richelbilderbeek/nmhc2ppreds")'
 	Rscript -e 'remotes::install_github("richelbilderbeek/bbbq", ref = "develop")'
 
 clean:
