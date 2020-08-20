@@ -1,39 +1,47 @@
-# History files
+fig_1.png
+ks.html
+table_1.latex
+table_1.csv
+fig_1_watermarked.png
+ks.pdf
+ks.csv
+ks.latex
+bbbq_1.pdf
+bbbq_1_*
+fig_bbbq_1_*
+fig_bbbq_1.*
+bbbq_1.zip
 .Rhistory
-.Rapp.history
-
-# Session Data files
-.RData
-
-# User-specific files
-.Ruserdata
-
-# Example code in package build process
-*-Ex.R
-
-# Output files from R CMD build
-/*.tar.gz
-
-# Output files from R CMD check
-/*.Rcheck/
-
-# RStudio files
-.Rproj.user/
-
-# produced vignettes
-vignettes/*.html
-vignettes/*.pdf
-
-# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
-.httr-oauth
-
-# knitr and R markdown default cache directories
-*_cache/
-/cache/
-
-# Temporary files created by R markdown
-*.utf8.md
-*.knit.md
-
-# R Environment Variables
-.Renviron
+table_2.csv
+table_2.latex
+Rplots.pdf
+haplotypes_lut.csv
+covid.fasta
+covid_peptides.csv
+covid_proteins.csv
+human_peptides.csv
+human_proteins.csv
+human.fasta
+jt_info.txt
+covid_topology.csv
+human_topology.csv
+covid_h*.csv
+human_h*.csv
+covid_h1_ic50s.csv
+*.latex
+fig_f_tmh_mhc*.png
+myco.fasta
+*.png
+table_ic50_binders.csv
+*.log
+myco_h*.csv
+myco_binders.csv
+myco_peptides.csv
+myco_proteins.csv
+myco_topology.csv
+covid_binders.csv
+covid_proteins_lut.csv
+human_proteins_lut.csv
+myco_proteins_lut.csv
+haplotypes_lut.csv
+counts.csv
