@@ -74,34 +74,34 @@ Rscript create_proteins_lut.R myco
 ```
 
 
-### `[target]_[haplotype_id]_[protein_id]_counts.csv`
+### `[target]_[haplotype_id]_counts.csv`
 
 `haplotype_id`|`protein_id`|`n_binders`|`n_binders_tmh`|`n_spots`|`n_spots_tmh`
 --------------|------------|-----------|---------------|---------|-------------
 h1            |p1          |11         |5              |100      |20
+h1            |p2          |12         |4              |10       |2
 
 Note that `n_spots` and `n_spots_tmh` can vary, 
 due to MHC class-dependent epitope lengths.
 
-
 ```
-Rscript create_all_counts.R
+Rscript create_all_counts_per_proteome.R
 ```
 
 Calls:
 
- * Locally: `Rscript create_counts.R [args]`
- * On Peregine: `sbatch ../../peregrine/scripts/run_r_script.sh create_counts.R [args]`
+ * Locally: `Rscript create_counts_per_proteome.R [args]`
+ * On Peregine: `sbatch ../../peregrine/scripts/run_r_script.sh create_counts_per_proteome.R [args]`
 
 ```
-[call] create_counts.R covid h1 p1
-[call] create_counts.R covid h1 p2
+[call] create_counts_per_proteome.R covid h1
+[call] create_counts_per_proteome.R covid h2
 ...
-[call] create_counts.R covid h2 p1
-[call] create_counts.R covid h2 p2
+[call] create_counts_per_proteome.R covid h1
+[call] create_counts_per_proteome.R covid h2
 ...
-[call] create_counts.R myco h1 p1
-[call] create_counts.R myco h1 p2
+[call] create_counts_per_proteome.R myco h1
+[call] create_counts_per_proteome.R myco h2
 ```
 
 ### 2. `make results`

@@ -13,12 +13,11 @@
 library(testthat)
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) != 3) {
-  args <- c("covid", "h1", "p1")
+if (length(args) != 2) {
+  args <- c("covid", "h1")
 }
 target <- args[1]
 haplotype_id <- args[2]
-protein_id <- args[3]
 
 haplotype_lut_filename <- "haplotypes_lut.csv"
 testthat::expect_true(file.exists(haplotype_lut_filename))
@@ -27,7 +26,7 @@ protein_lut_filename <- paste0(target, "_proteins_lut.csv")
 testthat::expect_true(file.exists(protein_lut_filename))
 
 target_filename <- paste0(
-  target, "_", haplotype_id, "_", protein_id, "_counts.csv"
+  target, "_", haplotype_id, "_counts.csv"
 )
 
 # Look up peptide
@@ -39,7 +38,8 @@ t_protein_lut <- readr::read_csv(
     sequence = readr::col_character()
   )
 )
-peptide <- t_protein_lut$sequence[t_protein_lut$protein_id == protein_id]
+peptides <- t_protein_lut$sequence
+
 
 # Look up haplotype
 t_haplotype_lut <- readr::read_csv(
@@ -67,15 +67,15 @@ if (mhc_class == 1) {
 }
 message("ic50_prediction_tool: ", ic50_prediction_tool)
 
-t <- bbbq::predict_counts(
-  peptide = peptide,
+t <- bbbq::predict_counts_per_proteome(
+  peptides = peptides,
   haplotype = haplotype,
   peptide_length = peptide_length,
   percentile = bbbq::get_ic50_percentile_binder(),
   verbose = TRUE,
   ic50_prediction_tool = ic50_prediction_tool
 )
-t$protein_id <- protein_id
+t$protein_id <- t_protein_lut$protein_id
 t <- dplyr::relocate(t, protein_id)
 t$haplotype_id <- haplotype_id
 t <- dplyr::relocate(t, haplotype_id)
