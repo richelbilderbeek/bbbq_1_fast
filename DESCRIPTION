@@ -1,6 +1,6 @@
-Package: bbbq1
+Package: bbbq1fast
 Title: The Bianchi Bilderbeek Bogaart Question Part One
-Version: 0.3
+Version: 0.1
 Authors@R: 
     person("Richèl J.C.", "Bilderbeek", email = "richel@richelbilderbeek.nl", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-1107-7049"))
 Description: Three people had multiple questions.
@@ -8,7 +8,7 @@ Description: Three people had multiple questions.
     It is about something.
 License: GPL-3
 Imports:
-    bbbq,
+    bbbq  (>= 1.6),
     testthat
 Encoding: UTF-8
 LazyData: true
