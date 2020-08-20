@@ -72,7 +72,7 @@ t <- bbbq::predict_counts_per_proteome(
   haplotype = haplotype,
   peptide_length = peptide_length,
   percentile = bbbq::get_ic50_percentile_binder(),
-  verbose = TRUE,
+  verbose = FALSE,
   ic50_prediction_tool = ic50_prediction_tool
 )
 t$protein_id <- t_protein_lut$protein_id
