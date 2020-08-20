@@ -39,8 +39,6 @@ before_script:
 script:
   - travis_wait 60 R CMD build .
   - travis_wait 60 R CMD check *tar.gz
-  - Rscript -e 'mhcnuggetsr::install_mhcnuggets()'
-  - Rscript -e 'pureseqtmr::install_pureseqtm()'
   - ./test.sh
   - if [ ! -f fig_f_tmh_mhc2_grid.png ]; then echo "file 'fig_f_tmh_mhc2_grid.png' not found" ; exit 1 ; fi
 

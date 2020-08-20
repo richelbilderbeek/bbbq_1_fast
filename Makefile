@@ -24,7 +24,7 @@ use_test_proteomes_and_haplotypes:
 # Create all counts
 peregrine: haplotypes_lut.csv \
      covid_proteins_lut.csv human_proteins_lut.csv myco_proteins_lut.csv \
-     myco_h21_p3_counts.csv
+     myco_h1_p1_counts.csv
 
 # Combine all counts into tables and figures
 results: counts.csv \
@@ -79,7 +79,7 @@ myco_proteins_lut.csv: myco.fasta
 
 # Local: will run all jobs
 # On Peregrine: will submit max 987 jobs
-myco_h21_p3_counts.csv:
+myco_h1_p1_counts.csv:
 	Rscript create_all_counts.R
 
 ################################################################################
