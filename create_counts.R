@@ -65,6 +65,7 @@ if (mhc_class == 1) {
 } else {
   stop("Unknown mhc_class: ", mhc_class)
 }
+message("ic50_prediction_tool: ", ic50_prediction_tool)
 
 t <- bbbq::predict_counts(
   peptide = peptide,
