@@ -51,16 +51,28 @@ t_haplotype_lut <- readr::read_csv(
   )
 )
 haplotype <- t_haplotype_lut$haplotype[t_haplotype_lut$haplotype_id == haplotype_id]
-peptide_length <- bbbq::get_mhc_peptide_length(
-  t_haplotype_lut$mhc_class[t_haplotype_lut$haplotype_id == haplotype_id]
-)
+message("haplotype: ", haplotype)
+mhc_class <- t_haplotype_lut$mhc_class[t_haplotype_lut$haplotype_id == haplotype_id]
+message("mhc_class: ", mhc_class)
+peptide_length <- bbbq::get_mhc_peptide_length(mhc_class)
+message("peptide_length: ", peptide_length)
+
+ic50_prediction_tool <- NA
+if (mhc_class == 1) {
+  ic50_prediction_tool <- "EpitopePrediction"
+} else if (mhc_class == 2) {
+  ic50_prediction_tool <- "netmhc2pan"
+} else {
+  stop("Unknown mhc_class: ", mhc_class)
+}
 
 t <- bbbq::predict_counts(
   peptide = peptide,
   haplotype = haplotype,
   peptide_length = peptide_length,
   percentile = bbbq::get_ic50_percentile_binder(),
-  verbose = TRUE
+  verbose = TRUE,
+  ic50_prediction_tool = ic50_prediction_tool
 )
 t$protein_id <- protein_id
 t <- dplyr::relocate(t, protein_id)
