@@ -54,5 +54,3 @@ for (i in seq_along(targets)) {
     }
   }
 }
-
-### `[target]_[haplotype_id]_[protein_id]_counts.csv`
