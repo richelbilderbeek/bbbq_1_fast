@@ -34,7 +34,7 @@ before_script:
   - sudo apt install tcsh
   - Rscript -e 'mhcnuggetsr::install_mhcnuggets()'
   - Rscript -e 'pureseqtmr::install_pureseqtm()'
-  - Rscript -e 'netmhc2pan::install_netmhc2pan()'
+  - Rscript -e 'if (netmhc2pan::is_url_valid()) netmhc2pan::install_netmhc2pan()'
 
 script:
   - travis_wait 60 R CMD build .
