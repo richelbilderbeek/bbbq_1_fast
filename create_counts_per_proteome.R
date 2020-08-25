@@ -38,7 +38,7 @@ t_protein_lut <- readr::read_csv(
     sequence = readr::col_character()
   )
 )
-peptides <- t_protein_lut$sequence
+protein_sequences <- t_protein_lut$sequence
 
 
 # Look up haplotype
@@ -68,7 +68,7 @@ if (mhc_class == 1) {
 message("ic50_prediction_tool: ", ic50_prediction_tool)
 
 t <- bbbq::predict_counts_per_proteome(
-  peptides = peptides,
+  protein_sequences = protein_sequences,
   haplotype = haplotype,
   peptide_length = peptide_length,
   percentile = bbbq::get_ic50_percentile_binder(),
