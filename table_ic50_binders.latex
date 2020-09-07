@@ -1,0 +1,78 @@
+\begin{table}
+
+\caption{\label{tab:tab:ic50_binders}IC50 values (in nM) per haplotype below which a peptide is considered a binder. Percentile used: 0.02}
+\centering
+\begin{tabular}[t]{l|r}
+\hline
+haplotype & ic50\\
+\hline
+HLA-A*01:01 & 5415.3798\\
+\hline
+HLA-A*02:01 & 5352.9536\\
+\hline
+HLA-A*03:01 & 5323.6876\\
+\hline
+HLA-A*24:02 & 4873.2764\\
+\hline
+HLA-A*26:01 & 5261.9676\\
+\hline
+HLA-B*07:02 & 1905.1326\\
+\hline
+HLA-B*08:01 & 727.3072\\
+\hline
+HLA-B*18:01 & 1119.9788\\
+\hline
+HLA-B*27:05 & 707.7406\\
+\hline
+HLA-B*39:01 & 1245.2188\\
+\hline
+HLA-B*40:02 & 723.7190\\
+\hline
+HLA-B*58:01 & 130.5820\\
+\hline
+HLA-B*15:01 & 229.6368\\
+\hline
+HLA-DRB1*0101 & 19.3098\\
+\hline
+HLA-DRB1*0301 & 292.1406\\
+\hline
+HLA-DRB1*0401 & 98.1878\\
+\hline
+HLA-DRB1*0405 & 62.0882\\
+\hline
+HLA-DRB1*0701 & 37.2596\\
+\hline
+HLA-DRB1*0802 & 238.8524\\
+\hline
+HLA-DRB1*0901 & 74.1576\\
+\hline
+HLA-DRB1*1101 & 54.9996\\
+\hline
+HLA-DRB1*1201 & 308.4098\\
+\hline
+HLA-DRB1*1302 & 86.2850\\
+\hline
+HLA-DRB1*1501 & 48.6456\\
+\hline
+HLA-DRB3*0101 & 167.1110\\
+\hline
+HLA-DRB3*0202 & 403.7286\\
+\hline
+HLA-DRB4*0101 & 77.0954\\
+\hline
+HLA-DRB5*0101 & 55.7070\\
+\hline
+HLA-DQA1*0501/DQB1*0201 & 188.7350\\
+\hline
+HLA-DQA1*0501/DQB1*0301 & 153.0178\\
+\hline
+HLA-DQA1*0301/DQB1*0302 & 411.3316\\
+\hline
+HLA-DQA1*0401/DQB1*0402 & 316.9380\\
+\hline
+HLA-DQA1*0101/DQB1*0501 & 653.4360\\
+\hline
+HLA-DQA1*0102/DQB1*0602 & 330.4440\\
+\hline
+\end{tabular}
+\end{table}
