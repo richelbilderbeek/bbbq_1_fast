@@ -15,6 +15,8 @@ library(testthat)
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) != 2) {
   args <- c("covid", "h1")
+  args <- c("human", "h14")
+  args <- c("human", "h20")
 }
 target <- args[1]
 haplotype_id <- args[2]
@@ -50,6 +52,15 @@ t_haplotype_lut <- readr::read_csv(
     haplotype_id = readr::col_character()
   )
 )
+
+if (!haplotype_id %in% t_haplotype_lut$haplotype_id) {
+  stop(
+    "Unknown haplotope_id: '", haplotype_id, "'. ",
+    "Available IDs: ", paste0(t_haplotype_lut$haplotype_id, collapse = ", ")
+  )
+}
+testthat::expect_true(haplotype_id %in% t_haplotype_lut$haplotype_id)
+
 haplotype <- t_haplotype_lut$haplotype[t_haplotype_lut$haplotype_id == haplotype_id]
 message("haplotype: ", haplotype)
 mhc_class <- t_haplotype_lut$mhc_class[t_haplotype_lut$haplotype_id == haplotype_id]
