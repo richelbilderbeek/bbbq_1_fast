@@ -56,7 +56,7 @@ t_haplotype_lut <- t_haplotype_lut %>% filter(mhc_class == the_mhc_class)
 table_filename <- "counts.csv"
 message("table_filename: '", table_filename, "'")
 testthat::expect_true(file.exists(table_filename))
-t_tmh_binders <- readr::read_csv(
+t_tmh_binders_all <- readr::read_csv(
   table_filename,
   col_types = readr::cols(
     target = readr::col_character(),
@@ -70,15 +70,15 @@ t_tmh_binders <- readr::read_csv(
 )
 
 # Only keep the desired MHC class
-t_tmh_binders <- t_tmh_binders %>% filter(haplotype_id %in% t_haplotype_lut$haplotype_id)
+t_tmh_binders_mhc <- t_tmh_binders_all %>% filter(haplotype_id %in% t_haplotype_lut$haplotype_id)
 
 # Group all proteins
-t_tmh_binders <- t_tmh_binders %>% dplyr::group_by(target, haplotype_id) %>%
+t_tmh_binders <- t_tmh_binders_mhc %>% dplyr::group_by(target, haplotype_id) %>%
     dplyr::summarize(
-      n_binders = sum(n_binders),
-      n_binders_tmh = sum(n_binders_tmh),
-      n_spots = sum(n_spots),
-      n_spots_tmh = sum(n_spots_tmh),
+      n_binders = sum(n_binders, na.rm = TRUE),
+      n_binders_tmh = sum(n_binders_tmh, na.rm = TRUE),
+      n_spots = sum(n_spots, na.rm = TRUE),
+      n_spots_tmh = sum(n_spots_tmh, na.rm = TRUE),
       .groups = "keep"
     ) %>% dplyr::ungroup()
 
