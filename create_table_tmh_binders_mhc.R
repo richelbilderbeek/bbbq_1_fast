@@ -76,10 +76,10 @@ t_long$protein_id <- as.factor(t_long$protein_id)
 # Group all proteins
 t_long <- t_long %>% dplyr::group_by(target, haplotype_id) %>%
     dplyr::summarize(
-      n_binders = sum(n_binders),
-      n_binders_tmh = sum(n_binders_tmh),
-      n_spots = sum(n_spots),
-      n_spots_tmh = sum(n_spots_tmh),
+      n_binders = sum(n_binders, na.rm = TRUE),
+      n_binders_tmh = sum(n_binders_tmh, na.rm = TRUE),
+      n_spots = sum(n_spots, na.rm = TRUE),
+      n_spots_tmh = sum(n_spots_tmh, na.rm = TRUE),
       .groups = "keep"
     ) %>% dplyr::ungroup()
 
