@@ -1,0 +1,52 @@
+\begin{table}
+
+\caption{\label{tab:tmh_binders_mhc2}Percentage of MHC-II 13-mers overlapping with TMH. Values in brackets show the number of binders that have at least one residue overlapping with a TMH (first value)as well as the number of binders (second value). Percentile used: 0.02}
+\centering
+\begin{tabular}[t]{l|l|l|l}
+\hline
+haplotype & covid & human & myco\\
+\hline
+HLA-DRB1*0101 & 27.599 (223/808) & NA (NA/NA) & 24.654 (16262/65961)\\
+\hline
+HLA-DRB1*0301 & 2.878 (8/278) & NA (NA/NA) & 7.849 (2650/33764)\\
+\hline
+HLA-DRB1*0401 & 18.552 (82/442) & NA (NA/NA) & 17.608 (4294/24386)\\
+\hline
+HLA-DRB1*0405 & 24.128 (166/688) & NA (NA/NA) & 21.985 (6747/30689)\\
+\hline
+HLA-DRB1*0701 & 29.018 (130/448) & NA (NA/NA) & 29.409 (8885/30212)\\
+\hline
+HLA-DRB1*0802 & 22.497 (173/769) & NA (NA/NA) & 19.270 (14395/74702)\\
+\hline
+HLA-DRB1*0901 & 25.167 (113/449) & NA (NA/NA) & 26.484 (10580/39948)\\
+\hline
+HLA-DRB1*1101 & 22.849 (85/372) & NA (NA/NA) & 14.776 (4606/31172)\\
+\hline
+HLA-DRB1*1201 & 36.474 (120/329) & NA (NA/NA) & 29.446 (6931/23538)\\
+\hline
+HLA-DRB1*1302 & 23.800 (124/521) & NA (NA/NA) & 18.846 (5626/29853)\\
+\hline
+HLA-DRB1*1501 & 39.414 (121/307) & NA (NA/NA) & 30.764 (5820/18918)\\
+\hline
+HLA-DRB3*0101 & 7.092 (30/423) & NA (NA/NA) & 6.397 (1864/29138)\\
+\hline
+HLA-DRB3*0202 & 19.171 (111/579) & NA (NA/NA) & 16.490 (4204/25495)\\
+\hline
+HLA-DRB4*0101 & 21.212 (77/363) & NA (NA/NA) & 17.079 (6877/40266)\\
+\hline
+HLA-DRB5*0101 & 25.357 (71/280) & NA (NA/NA) & 15.195 (3656/24061)\\
+\hline
+HLA-DQA1*0501/DQB1*0201 & 12.637 (46/364) & NA (NA/NA) & 6.872 (3362/48922)\\
+\hline
+HLA-DQA1*0501/DQB1*0301 & 13.018 (110/845) & NA (NA/NA) & 14.987 (34625/231037)\\
+\hline
+HLA-DQA1*0301/DQB1*0302 & 9.825 (45/458) & NA (NA/NA) & 8.631 (6729/77963)\\
+\hline
+HLA-DQA1*0401/DQB1*0402 & 15.041 (74/492) & NA (NA/NA) & 12.304 (10219/83055)\\
+\hline
+HLA-DQA1*0101/DQB1*0501 & 45.614 (78/171) & NA (NA/NA) & 25.470 (2224/8732)\\
+\hline
+HLA-DQA1*0102/DQB1*0602 & 24.381 (187/767) & NA (NA/NA) & 23.767 (31406/132141)\\
+\hline
+\end{tabular}
+\end{table}
