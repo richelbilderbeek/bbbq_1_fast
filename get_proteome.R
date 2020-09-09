@@ -33,39 +33,23 @@ if (file.exists(target_filename)) {
   q()
 }
 
-if (target_name == "test_covid") {
-  file.copy(
-    from = bbbq::get_test_covid_proteome_filename(),
-    to = "covid.fasta"
-  )
-  q()
-} else if (target_name == "test_human") {
-  file.copy(
-    from = bbbq::get_test_human_proteome_filename(),
-    to = "human.fasta"
-  )
-  q()
-} else if (target_name == "test_myco") {
-  file.copy(
-    from = bbbq::get_test_myco_proteome_filename(),
-    to = "myco.fasta"
-  )
-  q()
-}
-
-
 uniprot_id <- NA
 
 if (target_name == "covid") {
   uniprot_id <- "UP000464024"
+} else if (target_name == "hepa") {
+  uniprot_id <- "UP000006724"
 } else if (target_name == "human") {
   uniprot_id <- "UP000005640"
+} else if (target_name == "polio") {
+  uniprot_id <- "UP000000356"
 } else if (target_name == "myco") {
   uniprot_id <- "UP000001584"
+} else if (target_name == "rhino") {
+  uniprot_id <- "UP000007070"
 } else {
   stop("Unknown target '", target, "'")
 }
-
 
 tryCatch({
   UniprotR:::GetProteomeFasta(ProteomeID = uniprot_id, directorypath = getwd())
