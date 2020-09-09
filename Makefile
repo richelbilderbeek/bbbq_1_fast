@@ -23,8 +23,10 @@ use_test_proteomes_and_haplotypes:
 
 # Create all counts
 peregrine: haplotypes_lut.csv \
-     covid_proteins_lut.csv hepa_proteins_lut.csv human_proteins_lut.csv \
+     covid_proteins_lut.csv flua_proteins_lut.csv hepa_proteins_lut.csv \
+     human_proteins_lut.csv \
      myco_proteins_lut.csv polio_proteins_lut.csv rhino_proteins_lut.csv \
+     flua_h1_counts.csv \
      human_h1_counts.csv \
      rhino_h1_counts.csv
 
@@ -56,6 +58,9 @@ haplotypes_lut.csv:
 covid.fasta:
 	Rscript get_proteome.R covid
 
+flua.fasta:
+	Rscript get_proteome.R flua
+
 hepa.fasta:
 	Rscript get_proteome.R hepa
 
@@ -78,6 +83,9 @@ rhino.fasta:
 covid_proteins_lut.csv: covid.fasta
 	Rscript create_proteins_lut.R covid
 
+flua_proteins_lut.csv: flua.fasta
+	Rscript create_proteins_lut.R flua
+
 hepa_proteins_lut.csv: hepa.fasta
 	Rscript create_proteins_lut.R hepa
 
@@ -99,6 +107,9 @@ rhino_proteins_lut.csv: rhino.fasta
 
 # Will submit/run all jobs
 human_h1_counts.csv:
+	Rscript create_all_counts_per_proteome.R
+
+flua_h1_counts.csv:
 	Rscript create_all_counts_per_proteome.R
 
 rhino_h1_counts.csv:

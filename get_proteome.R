@@ -37,6 +37,8 @@ uniprot_id <- NA
 
 if (target_name == "covid") {
   uniprot_id <- "UP000464024"
+} else if (target_name == "flua") {
+  uniprot_id <- "UP000009255"
 } else if (target_name == "hepa") {
   uniprot_id <- "UP000006724"
 } else if (target_name == "human") {
