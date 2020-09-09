@@ -33,6 +33,8 @@ target_filename <- paste0("fig_f_tmh_mhc", mhc_class, ".png")
 message("target_filename: '", target_filename, "'")
 target_filename_grid <- paste0("fig_f_tmh_mhc", mhc_class, "_grid.png")
 message("target_filename_grid: '", target_filename_grid, "'")
+target_filename_normalized <- paste0("fig_f_tmh_mhc", mhc_class, "_normalized.png")
+message("target_filename_normalized: '", target_filename_normalized, "'")
 
 
 haplotype_lut_filename <- "haplotypes_lut.csv"
@@ -137,3 +139,34 @@ p + ggsave(target_filename, width = 7, height = 7)
 p + facet_grid(target ~ ., scales = "free") +
   ggsave(target_filename_grid, width = 7, height = 7)
 
+
+
+# Normalize
+t_tmh_binders$coincidence <- NA
+for (i in seq_len(nrow(t_tmh_binders))) {
+  target <- t_tmh_binders$target[i]
+  coincidence <- NA
+  if (target == "covid") coincidence <- f_covid
+  else if (target == "human") coincidence <- f_human
+  else if (target == "myco") coincidence <- f_myco
+  else stop("?")
+  t_tmh_binders$coincidence[i] <- coincidence
+
+}
+t_tmh_binders$normalized_f_tmh <- t_tmh_binders$f_tmh / t_tmh_binders$coincidence
+
+ggplot(t_tmh_binders, aes(x = haplotype, y = normalized_f_tmh, fill = target)) +
+  scale_fill_manual(values = c("human" = "#ffffff", "covid" = "#cccccc", "myco" = "#888888")) +
+  geom_col(position = position_dodge(), color = "#000000") +
+  xlab(paste0("MHC-", roman_mhc_class, " HLA haplotype")) +
+  ylab("Normalized epitopes overlapping \nwith transmembrane helix") +
+  scale_y_continuous() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_hline(aes(yintercept = 1), lty = "dashed") +
+  labs(
+    title = "Normalized % epitopes that overlap with TMH per haplotype",
+    caption = glue::glue(
+      "Dashed line: normalized expected percentage of epitopes ",
+      "that have one residue overlapping with a TMH"
+    )
+  ) + ggsave(target_filename_normalized, width = 7, height = 7)
