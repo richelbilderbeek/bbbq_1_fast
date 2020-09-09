@@ -19,6 +19,7 @@ haplotypes_lut.csv
 
 # Reference proteomes
 covid.fasta
+flua.fasta
 hepa.fasta
 human.fasta
 polio.fasta
@@ -27,6 +28,7 @@ myco.fasta
 
 # Protein LUTs
 covid_proteins_lut.csv
+flua_proteins_lut.csv
 hepa_proteins_lut.csv
 human_proteins_lut.csv
 myco_proteins_lut.csv

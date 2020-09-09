@@ -103,8 +103,12 @@ t_coincidence <- t_tmh_binders %>% dplyr::group_by(target) %>%
 t_coincidence$f_tmh <- t_coincidence$n_spots_tmh / t_coincidence$n_spots
 
 f_covid <- t_coincidence$f_tmh[t_coincidence$target == "covid"]
+f_flua <- t_coincidence$f_tmh[t_coincidence$target == "flua"]
+f_hepa <- t_coincidence$f_tmh[t_coincidence$target == "hepa"]
 f_human <- t_coincidence$f_tmh[t_coincidence$target == "human"]
 f_myco <- t_coincidence$f_tmh[t_coincidence$target == "myco"]
+f_polio <- t_coincidence$f_tmh[t_coincidence$target == "polio"]
+f_rhino <- t_coincidence$f_tmh[t_coincidence$target == "rhino"]
 
 roman_mhc_class <- NA
 if (mhc_class == 1) roman_mhc_class <- "I"
@@ -112,9 +116,13 @@ if (mhc_class == 2) roman_mhc_class <- "II"
 
 caption_text <- paste0(
   "Horizontal lines: % ", bbbq::get_mhc_peptide_length(mhc_class) ,"-mers that overlaps with TMH in ",
-  "humans (dotted line, ", formatC(100.0 * mean(f_human), digits = 3),"%), \n",
-  "Mycobacterium (dashed line, ", formatC(100.0 * mean(f_myco), digits = 3),"%), \n",
-  "SARS-Cov2 (solid line, ", stringr::str_trim(formatC(100.0 * mean(f_covid), digits = 3)),"%)"
+  "SARS-Cov2 (?dotted line, ",     formatC(100.0 * mean(f_covid), digits = 3),"%), \n",
+  "Influenza A (?dotted line, ",   formatC(100.0 * mean(f_flua), digits = 3),"%), \n",
+  "Hepatitus A (?dotted line, ",   formatC(100.0 * mean(f_hepa), digits = 3),"%), \n",
+  "humans (?dotted line, ",        formatC(100.0 * mean(f_human), digits = 3),"%), \n",
+  "Mycobacterium (?dashed line, ", formatC(100.0 * mean(f_myco), digits = 3),"%), \n",
+  "Polio (?dashed line, ",         formatC(100.0 * mean(f_polio), digits = 3),"%), \n",
+  "Rhinovirus (?solid line, ",     formatC(100.0 * mean(f_rhino), digits = 3),"%)"
 )
 p <- ggplot(t_tmh_binders, aes(x = haplotype, y = f_tmh, fill = target)) +
   scale_fill_manual(values = c("human" = "#ffffff", "covid" = "#cccccc", "myco" = "#888888")) +

@@ -1,6 +1,6 @@
 # Merge all counts
 
-targets <- c("covid", "human", "myco")
+targets <- c("covid", "flua", "hepa", "human", "myco", "polio", "rhino")
 haplotype_lut_filename <- "haplotypes_lut.csv"
 testthat::expect_true(file.exists(haplotype_lut_filename))
 
