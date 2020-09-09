@@ -23,8 +23,10 @@ use_test_proteomes_and_haplotypes:
 
 # Create all counts
 peregrine: haplotypes_lut.csv \
-     covid_proteins_lut.csv human_proteins_lut.csv myco_proteins_lut.csv \
-     human_h1_counts.csv
+     covid_proteins_lut.csv hepa_proteins_lut.csv human_proteins_lut.csv \
+     myco_proteins_lut.csv polio_proteins_lut.csv rhino_proteins_lut.csv \
+     human_h1_counts.csv \
+     rhino_h1_counts.csv
 
 # Combine all counts into tables and figures
 results: counts.csv \
@@ -95,9 +97,11 @@ rhino_proteins_lut.csv: rhino.fasta
 # Counts, using sbatch or not
 ################################################################################
 
-# Local: will run all jobs
-# On Peregrine: will submit max 987 jobs
+# Will submit/run all jobs
 human_h1_counts.csv:
+	Rscript create_all_counts_per_proteome.R
+
+rhino_h1_counts.csv:
 	Rscript create_all_counts_per_proteome.R
 
 ################################################################################
