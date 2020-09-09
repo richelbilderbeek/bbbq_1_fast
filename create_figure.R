@@ -125,7 +125,6 @@ caption_text <- paste0(
   "Rhinovirus (?solid line, ",     formatC(100.0 * mean(f_rhino), digits = 3),"%)"
 )
 p <- ggplot(t_tmh_binders, aes(x = haplotype, y = f_tmh, fill = target)) +
-  scale_fill_manual(values = c("human" = "#ffffff", "covid" = "#cccccc", "myco" = "#888888")) +
   geom_col(position = position_dodge(), color = "#000000") +
   xlab(paste0("MHC-", roman_mhc_class, " HLA haplotype")) +
   ylab("Epitopes overlapping \nwith transmembrane helix") +
@@ -141,11 +140,11 @@ p <- ggplot(t_tmh_binders, aes(x = haplotype, y = f_tmh, fill = target)) +
     title = "% epitopes that overlap with TMH per haplotype",
     caption = caption_text
   )
-
+p
 p + ggsave(target_filename, width = 7, height = 7)
 
 p + facet_grid(target ~ ., scales = "free") +
-  ggsave(target_filename_grid, width = 7, height = 7)
+  ggsave(target_filename_grid, width = 7, height = 14)
 
 
 
@@ -155,8 +154,12 @@ for (i in seq_len(nrow(t_tmh_binders))) {
   target <- t_tmh_binders$target[i]
   coincidence <- NA
   if (target == "covid") coincidence <- f_covid
+  else if (target == "flua") coincidence <- f_flua
+  else if (target == "hepa") coincidence <- f_hepa
   else if (target == "human") coincidence <- f_human
   else if (target == "myco") coincidence <- f_myco
+  else if (target == "polio") coincidence <- f_polio
+  else if (target == "rhino") coincidence <- f_rhino
   else stop("?")
   t_tmh_binders$coincidence[i] <- coincidence
 
@@ -164,7 +167,6 @@ for (i in seq_len(nrow(t_tmh_binders))) {
 t_tmh_binders$normalized_f_tmh <- t_tmh_binders$f_tmh / t_tmh_binders$coincidence
 
 ggplot(t_tmh_binders, aes(x = haplotype, y = normalized_f_tmh, fill = target)) +
-  scale_fill_manual(values = c("human" = "#ffffff", "covid" = "#cccccc", "myco" = "#888888")) +
   geom_col(position = position_dodge(), color = "#000000") +
   xlab(paste0("MHC-", roman_mhc_class, " HLA haplotype")) +
   ylab("Normalized epitopes overlapping \nwith transmembrane helix") +
