@@ -54,11 +54,20 @@ haplotypes_lut.csv:
 covid.fasta:
 	Rscript get_proteome.R covid
 
+hepa.fasta:
+	Rscript get_proteome.R hepa
+
 human.fasta:
 	Rscript get_proteome.R human
 
 myco.fasta:
 	Rscript get_proteome.R myco
+
+polio.fasta:
+	Rscript get_proteome.R polio
+
+rhino.fasta:
+	Rscript get_proteome.R rhino
 
 ################################################################################
 # Protein LUT
@@ -67,11 +76,20 @@ myco.fasta:
 covid_proteins_lut.csv: covid.fasta
 	Rscript create_proteins_lut.R covid
 
+hepa_proteins_lut.csv: hepa.fasta
+	Rscript create_proteins_lut.R hepa
+
 human_proteins_lut.csv: human.fasta
 	Rscript create_proteins_lut.R human
 
 myco_proteins_lut.csv: myco.fasta
 	Rscript create_proteins_lut.R myco
+
+polio_proteins_lut.csv: polio.fasta
+	Rscript create_proteins_lut.R polio
+
+rhino_proteins_lut.csv: rhino.fasta
+	Rscript create_proteins_lut.R rhino
 
 ################################################################################
 # Counts, using sbatch or not

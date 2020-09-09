@@ -1,7 +1,7 @@
 # Create all counts
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) == 0) {
-  targets <- c("covid", "human", "myco")
+  targets <- c("covid", "hepa", "human", "myco", "polio", "rhino")
 } else {
   targets <- args
 }
