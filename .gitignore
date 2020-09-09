@@ -16,12 +16,27 @@ table_2.csv
 table_2.latex
 Rplots.pdf
 haplotypes_lut.csv
+
+# Reference proteomes
 covid.fasta
+hepa.fasta
+human.fasta
+polio.fasta
+rhino.fasta
+myco.fasta
+
+# Protein LUTs
+covid_proteins_lut.csv
+hepa_proteins_lut.csv
+human_proteins_lut.csv
+myco_proteins_lut.csv
+polio_proteins_lut.csv
+rhino_proteins_lut.csv
+
 covid_peptides.csv
 covid_proteins.csv
 human_peptides.csv
 human_proteins.csv
-human.fasta
 jt_info.txt
 covid_topology.csv
 human_topology.csv
@@ -29,7 +44,6 @@ covid_h*.csv
 human_h*.csv
 covid_h1_ic50s.csv
 fig_f_tmh_mhc*.png
-myco.fasta
 *.png
 table_ic50_binders.csv
 *.log
@@ -39,8 +53,6 @@ myco_peptides.csv
 myco_proteins.csv
 myco_topology.csv
 covid_binders.csv
-covid_proteins_lut.csv
-human_proteins_lut.csv
-myco_proteins_lut.csv
 haplotypes_lut.csv
 counts.csv
+
