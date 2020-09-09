@@ -36,6 +36,13 @@ message("target_filename_grid: '", target_filename_grid, "'")
 target_filename_normalized <- paste0("fig_f_tmh_mhc", mhc_class, "_normalized.png")
 message("target_filename_normalized: '", target_filename_normalized, "'")
 
+target_virus_only_filename <- paste0("fig_f_tmh_mhc", mhc_class, "_virus_only.png")
+message("target_virus_only_filename: '", target_virus_only_filename, "'")
+target_virus_only_filename_grid <- paste0("fig_f_tmh_mhc", mhc_class, "_grid_virus_only.png")
+message("target_virus_only_filename_grid: '", target_virus_only_filename_grid, "'")
+target_virus_only_filename_normalized <- paste0("fig_f_tmh_mhc", mhc_class, "_normalized_virus_only.png")
+message("target_virus_only_filename_normalized: '", target_virus_only_filename_normalized, "'")
+
 
 haplotype_lut_filename <- "haplotypes_lut.csv"
 message("'haplotype_lut_filename': '", haplotype_lut_filename, "'")
@@ -180,3 +187,62 @@ ggplot(t_tmh_binders, aes(x = haplotype, y = normalized_f_tmh, fill = target)) +
       "that have one residue overlapping with a TMH"
     )
   ) + ggsave(target_filename_normalized, width = 7, height = 7)
+
+
+
+# Virus only
+t_tmh_binders_virus_only <- t_tmh_binders %>% filter(target %in% c("covid", "flua", "hepa", "polio", "rhino"))
+t_coincidence_virus_only <- t_coincidence %>% filter(target %in% c("covid", "flua", "hepa", "polio", "rhino"))
+
+caption_text <- paste0(
+  "Horizontal lines: % ", bbbq::get_mhc_peptide_length(mhc_class) ,"-mers that overlaps with TMH in ",
+  "SARS-Cov2 (?dotted line, ",     formatC(100.0 * mean(f_covid), digits = 3),"%), \n",
+  "Influenza A (?dotted line, ",   formatC(100.0 * mean(f_flua), digits = 3),"%), \n",
+  "Hepatitus A (?dotted line, ",   formatC(100.0 * mean(f_hepa), digits = 3),"%), \n",
+  "Polio (?dashed line, ",         formatC(100.0 * mean(f_polio), digits = 3),"%), \n",
+  "Rhinovirus (?solid line, ",     formatC(100.0 * mean(f_rhino), digits = 3),"%)"
+)
+
+
+p <- ggplot(
+  t_tmh_binders_virus_only,
+  aes(x = as.factor(haplotype), y = f_tmh, fill = target)
+) +
+  geom_col(position = position_dodge(), color = "#000000") +
+  xlab(paste0("MHC-", roman_mhc_class, " HLA haplotype")) +
+  ylab("Epitopes overlapping \nwith transmembrane helix") +
+  scale_y_continuous(
+    labels = scales::percent_format(accuracy = 2),
+    breaks = seq(0.0, 1.0, by = 0.1),
+    minor_breaks = seq(0.0, 1.0, by = 0.1)
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_hline(data = t_coincidence_virus_only, aes(yintercept = f_tmh, lty = target)) +
+  labs(
+    title = "% epitopes that overlap with TMH per haplotype",
+    caption = caption_text
+  )
+p
+p + ggsave(target_virus_only_filename, width = 7, height = 7)
+
+p + facet_grid(target ~ ., scales = "free") +
+  ggsave(target_virus_only_filename_grid, width = 7, height = 14)
+
+
+ggplot(
+  t_tmh_binders %>% filter(target %in% c("covid", "flua", "hepa", "polio", "rhino")),
+    aes(x = haplotype, y = normalized_f_tmh, fill = target)
+  ) +
+  geom_col(position = position_dodge(), color = "#000000") +
+  xlab(paste0("MHC-", roman_mhc_class, " HLA haplotype")) +
+  ylab("Normalized epitopes overlapping \nwith transmembrane helix") +
+  scale_y_continuous() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_hline(aes(yintercept = 1), lty = "dashed") +
+  labs(
+    title = "Normalized % epitopes that overlap with TMH per haplotype",
+    caption = glue::glue(
+      "Dashed line: normalized expected percentage of epitopes ",
+      "that have one residue overlapping with a TMH"
+    )
+  ) + ggsave(target_virus_only_filename_normalized, width = 7, height = 7)
