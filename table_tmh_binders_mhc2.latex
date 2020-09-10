@@ -1,6 +1,7 @@
-\begin{table}
+\begin{sidewaystable}
 
 \caption{\label{tab:tmh_binders_mhc2}Percentage of MHC-II 13-mers overlapping with TMH. Values in brackets show the number of binders that have at least one residue overlapping with a TMH (first value)as well as the number of binders (second value). Percentile used: 0.02}
+\scriptsize
 \centering
 \begin{tabular}[t]{l|l|l|l|l|l|l|l}
 \hline
@@ -49,4 +50,4 @@ HLA-DQA1*0101/DQB1*0501 & 45.614 (78/171) & 12.500 (4/32) & 0.000 (0/31) & 23.42
 HLA-DQA1*0102/DQB1*0602 & 24.381 (187/767) & 12.626 (25/198) & 9.677 (9/93) & 18.504 (264196/1427800) & 23.767 (31406/132141) & 31.313 (31/99) & 7.207 (8/111)\\
 \hline
 \end{tabular}
-\end{table}
+\end{sidewaystable}
