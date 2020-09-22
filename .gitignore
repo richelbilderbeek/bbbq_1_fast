@@ -21,6 +21,7 @@ haplotypes_lut.csv
 covid.fasta
 flua.fasta
 hepa.fasta
+hiv.fasta
 human.fasta
 polio.fasta
 rhino.fasta
@@ -30,6 +31,7 @@ myco.fasta
 covid_proteins_lut.csv
 flua_proteins_lut.csv
 hepa_proteins_lut.csv
+hiv_proteins_lut.csv
 human_proteins_lut.csv
 myco_proteins_lut.csv
 polio_proteins_lut.csv
