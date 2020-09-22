@@ -9,7 +9,6 @@
 #
 #   make results
 #
-.DELETE_ON_ERROR:
 all: 
 	echo "Run either 'make peregrine' on Peregrine, to create the data"
 	echo "or run either 'make results' locally, to create the results"
@@ -37,7 +36,7 @@ results: counts.csv \
          table_f_tmh.latex
 
 # Combine all counts into tables and figures
-figures: fig_f_tmh_mhc1.png fig_f_tmh_mhc2.png
+figures: fig_f_tmh_mhc1.png fig_f_tmh_mhc2.png general.csv
 
 ################################################################################
 #
@@ -64,6 +63,9 @@ flua.fasta:
 hepa.fasta:
 	Rscript get_proteome.R hepa
 
+hiv.fasta:
+	Rscript get_proteome.R hiv
+
 human.fasta:
 	Rscript get_proteome.R human
 
@@ -89,6 +91,9 @@ flua_proteins_lut.csv: flua.fasta
 hepa_proteins_lut.csv: hepa.fasta
 	Rscript create_proteins_lut.R hepa
 
+hiv_proteins_lut.csv: hiv.fasta
+	Rscript create_proteins_lut.R hiv
+
 human_proteins_lut.csv: human.fasta
 	Rscript create_proteins_lut.R human
 
@@ -110,6 +115,9 @@ human_h1_counts.csv:
 	Rscript create_all_counts_per_proteome.R
 
 flua_h1_counts.csv:
+	Rscript create_all_counts_per_proteome.R
+
+hiv_h1_counts.csv:
 	Rscript create_all_counts_per_proteome.R
 
 rhino_h1_counts.csv:
@@ -155,8 +163,8 @@ fig_f_tmh_mhc1.png: counts.csv
 fig_f_tmh_mhc2.png: counts.csv
 	Rscript create_figure.R mhc2
 
-#bbbq_1_percentages.csv: bbbq_1.Rmd
-#	Rscript -e 'rmarkdown::render("bbbq_1.Rmd")'
+general.csv:
+	Rscript create_general.R
 
 update_packages:
 	Rscript -e 'remotes::install_github("richelbilderbeek/peregrine")'
