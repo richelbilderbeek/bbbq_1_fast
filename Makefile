@@ -23,9 +23,10 @@ use_test_proteomes_and_haplotypes:
 # Create all counts
 peregrine: haplotypes_lut.csv \
      covid_proteins_lut.csv flua_proteins_lut.csv hepa_proteins_lut.csv \
-     human_proteins_lut.csv \
+     hiv_proteins_lut.csv human_proteins_lut.csv \
      myco_proteins_lut.csv polio_proteins_lut.csv rhino_proteins_lut.csv \
      flua_h1_counts.csv \
+     hiv_h1_counts.csv \
      human_h1_counts.csv \
      rhino_h1_counts.csv
 
@@ -36,7 +37,7 @@ results: counts.csv \
          table_f_tmh.latex
 
 # Combine all counts into tables and figures
-figures: fig_f_tmh_mhc1.png fig_f_tmh_mhc2.png general.csv
+figures: fig_f_tmh_mhc1.png fig_f_tmh_mhc2.png general.csv create_figure.R
 
 ################################################################################
 #

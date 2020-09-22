@@ -43,6 +43,20 @@ message("target_virus_only_filename_grid: '", target_virus_only_filename_grid, "
 target_virus_only_filename_normalized <- paste0("fig_f_tmh_mhc", mhc_class, "_normalized_virus_only.png")
 message("target_virus_only_filename_normalized: '", target_virus_only_filename_normalized, "'")
 
+general_filename <- "general.csv"
+message("general_filename: '", general_filename, "'")
+testthat::expect_true(file.exists(general_filename))
+t_general <- readr::read_csv(
+  general_filename,
+  col_types = readr::cols(
+    target = readr::col_character(),
+    english_name = readr::col_character(),
+    n_tmh_tmhmm = readr::col_double(),
+    n_tmh_pureseqtm = readr::col_double(),
+    n_aas = readr::col_double()
+  )
+)
+t_general
 
 haplotype_lut_filename <- "haplotypes_lut.csv"
 message("'haplotype_lut_filename': '", haplotype_lut_filename, "'")
@@ -55,8 +69,6 @@ t_haplotype_lut <- readr::read_csv(
     haplotype_id = readr::col_character()
   )
 )
-
-
 t_haplotype_lut$name <- mhcnuggetsr::to_mhcnuggets_names(t_haplotype_lut$haplotype)
 # Only keep the desired MHC class
 t_haplotype_lut <- t_haplotype_lut %>% filter(mhc_class == the_mhc_class)
@@ -151,7 +163,21 @@ p <- ggplot(t_tmh_binders, aes(x = haplotype, y = f_tmh, fill = target)) +
 p
 p + ggsave(target_filename, width = 7, height = 7)
 
-p + facet_grid(target ~ ., scales = "free") +
+
+# Facet labels
+facet_labels <- paste0(
+  t_general$english_name, "\n",
+  "TMHs: ", t_general$n_tmh_tmhmm, "/", t_general$n_tmh_pureseqtm, "\n",
+  t_general$n_aas, " AAs"
+)
+names(facet_labels) <- t_general$target
+
+
+p + facet_grid(
+  target ~ ., scales = "free",
+  labeller = ggplot2::as_labeller(facet_labels)
+) + ggplot2::theme(strip.text.y.right = ggplot2::element_text(angle = 0)) +
+  ggplot2::theme(legend.position="none") +
   ggsave(target_filename_grid, width = 7, height = 14)
 
 
@@ -164,6 +190,7 @@ for (i in seq_len(nrow(t_tmh_binders))) {
   if (target == "covid") coincidence <- f_covid
   else if (target == "flua") coincidence <- f_flua
   else if (target == "hepa") coincidence <- f_hepa
+  else if (target == "hiv") coincidence <- f_hiv
   else if (target == "human") coincidence <- f_human
   else if (target == "myco") coincidence <- f_myco
   else if (target == "polio") coincidence <- f_polio
@@ -192,16 +219,17 @@ ggplot(t_tmh_binders, aes(x = haplotype, y = normalized_f_tmh, fill = target)) +
 
 
 # Virus only
-t_tmh_binders_virus_only <- t_tmh_binders %>% filter(target %in% c("covid", "flua", "hepa", "polio", "rhino"))
-t_coincidence_virus_only <- t_coincidence %>% filter(target %in% c("covid", "flua", "hepa", "polio", "rhino"))
+t_tmh_binders_virus_only <- t_tmh_binders %>% filter(target %in% c("covid", "flua", "hepa", "hiv", "polio", "rhino"))
+t_coincidence_virus_only <- t_coincidence %>% filter(target %in% c("covid", "flua", "hepa", "hiv", "polio", "rhino"))
 
 caption_text <- paste0(
   "Horizontal lines: % ", bbbq::get_mhc_peptide_length(mhc_class) ,"-mers that overlaps with TMH in ",
-  "SARS-Cov2 (?dotted line, ",     formatC(100.0 * mean(f_covid), digits = 3),"%), \n",
-  "Influenza A (?dotted line, ",   formatC(100.0 * mean(f_flua), digits = 3),"%), \n",
-  "Hepatitus A (?dotted line, ",   formatC(100.0 * mean(f_hepa), digits = 3),"%), \n",
-  "Polio (?dashed line, ",         formatC(100.0 * mean(f_polio), digits = 3),"%), \n",
-  "Rhinovirus (?solid line, ",     formatC(100.0 * mean(f_rhino), digits = 3),"%)"
+  "SARS-Cov2 (",     formatC(100.0 * mean(f_covid), digits = 3),"%), \n",
+  "Influenza A (",   formatC(100.0 * mean(f_flua), digits = 3),"%), \n",
+  "Hepatitus A (",   formatC(100.0 * mean(f_hepa), digits = 3),"%), \n",
+  "HIV (",           formatC(100.0 * mean(f_hiv), digits = 3),"%), \n",
+  "Polio (",         formatC(100.0 * mean(f_polio), digits = 3),"%), \n",
+  "Rhinovirus (",     formatC(100.0 * mean(f_rhino), digits = 3),"%)"
 )
 
 
@@ -231,7 +259,7 @@ p + facet_grid(target ~ ., scales = "free") +
 
 
 ggplot(
-  t_tmh_binders %>% filter(target %in% c("covid", "flua", "hepa", "polio", "rhino")),
+  t_tmh_binders %>% filter(target %in% c("covid", "flua", "hepa", "hiv", "polio", "rhino")),
     aes(x = haplotype, y = normalized_f_tmh, fill = target)
   ) +
   geom_col(position = position_dodge(), color = "#000000") +

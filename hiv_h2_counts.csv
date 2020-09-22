@@ -1,0 +1,10 @@
+haplotype_id,protein_id,n_binders,n_binders_tmh,n_spots,n_spots_tmh
+h2,p1,1,1,73,28
+h2,p2,0,0,78,0
+h2,p3,2,0,88,0
+h2,p4,2,0,184,0
+h2,p5,19,0,1427,0
+h2,p6,3,0,198,0
+h2,p7,2,0,108,0
+h2,p8,22,11,848,91
+h2,p9,4,0,492,0
