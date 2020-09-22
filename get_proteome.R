@@ -41,6 +41,8 @@ if (target_name == "covid") {
   uniprot_id <- "UP000009255"
 } else if (target_name == "hepa") {
   uniprot_id <- "UP000006724"
+} else if (target_name == "hiv") {
+  uniprot_id <- "UP000002241"
 } else if (target_name == "human") {
   uniprot_id <- "UP000005640"
 } else if (target_name == "polio") {

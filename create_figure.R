@@ -16,7 +16,7 @@ library(testthat, warn.conflicts = FALSE)
 library(ggplot2)
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) == 0) {
+if (1 == 2) {
   args <- "mhc1"
 }
 expect_equal(length(args), 1)
@@ -110,10 +110,11 @@ t_coincidence <- t_tmh_binders %>% dplyr::group_by(target) %>%
 t_coincidence$f_tmh <- t_coincidence$n_spots_tmh / t_coincidence$n_spots
 
 f_covid <- t_coincidence$f_tmh[t_coincidence$target == "covid"]
-f_flua <- t_coincidence$f_tmh[t_coincidence$target == "flua"]
-f_hepa <- t_coincidence$f_tmh[t_coincidence$target == "hepa"]
+f_flua  <- t_coincidence$f_tmh[t_coincidence$target == "flua"]
+f_hepa  <- t_coincidence$f_tmh[t_coincidence$target == "hepa"]
+f_hiv   <- t_coincidence$f_tmh[t_coincidence$target == "hiv"]
 f_human <- t_coincidence$f_tmh[t_coincidence$target == "human"]
-f_myco <- t_coincidence$f_tmh[t_coincidence$target == "myco"]
+f_myco  <- t_coincidence$f_tmh[t_coincidence$target == "myco"]
 f_polio <- t_coincidence$f_tmh[t_coincidence$target == "polio"]
 f_rhino <- t_coincidence$f_tmh[t_coincidence$target == "rhino"]
 
@@ -123,13 +124,14 @@ if (mhc_class == 2) roman_mhc_class <- "II"
 
 caption_text <- paste0(
   "Horizontal lines: % ", bbbq::get_mhc_peptide_length(mhc_class) ,"-mers that overlaps with TMH in ",
-  "SARS-Cov2 (?dotted line, ",     formatC(100.0 * mean(f_covid), digits = 3),"%), \n",
-  "Influenza A (?dotted line, ",   formatC(100.0 * mean(f_flua), digits = 3),"%), \n",
-  "Hepatitus A (?dotted line, ",   formatC(100.0 * mean(f_hepa), digits = 3),"%), \n",
-  "humans (?dotted line, ",        formatC(100.0 * mean(f_human), digits = 3),"%), \n",
-  "Mycobacterium (?dashed line, ", formatC(100.0 * mean(f_myco), digits = 3),"%), \n",
-  "Polio (?dashed line, ",         formatC(100.0 * mean(f_polio), digits = 3),"%), \n",
-  "Rhinovirus (?solid line, ",     formatC(100.0 * mean(f_rhino), digits = 3),"%)"
+  "SARS-Cov2 (",     formatC(100.0 * mean(f_covid), digits = 3),"%), \n",
+  "Influenza A (",   formatC(100.0 * mean(f_flua ), digits = 3),"%), \n",
+  "Hepatitus A (",   formatC(100.0 * mean(f_hepa ), digits = 3),"%), \n",
+  "HIV (",           formatC(100.0 * mean(f_hiv  ), digits = 3),"%), \n",
+  "humans (",        formatC(100.0 * mean(f_human), digits = 3),"%), \n",
+  "Mycobacterium (", formatC(100.0 * mean(f_myco ), digits = 3),"%), \n",
+  "Polio (",         formatC(100.0 * mean(f_polio), digits = 3),"%), \n",
+  "Rhinovirus (",    formatC(100.0 * mean(f_rhino), digits = 3),"%)"
 )
 p <- ggplot(t_tmh_binders, aes(x = haplotype, y = f_tmh, fill = target)) +
   geom_col(position = position_dodge(), color = "#000000") +
@@ -139,7 +141,6 @@ p <- ggplot(t_tmh_binders, aes(x = haplotype, y = f_tmh, fill = target)) +
     labels = scales::percent_format(accuracy = 2),
     breaks = seq(0.0, 1.0, by = 0.1),
     minor_breaks = seq(0.0, 1.0, by = 0.1)
-    # limits = c(0, 1.0)
   ) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   geom_hline(data = t_coincidence, aes(yintercept = f_tmh, lty = target)) +
