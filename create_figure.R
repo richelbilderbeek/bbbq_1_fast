@@ -124,13 +124,13 @@ if (mhc_class == 2) roman_mhc_class <- "II"
 
 caption_text <- paste0(
   "Horizontal lines: % ", bbbq::get_mhc_peptide_length(mhc_class) ,"-mers that overlaps with TMH in ",
-  "SARS-Cov2 (",     formatC(100.0 * mean(f_covid), digits = 3),"%), \n",
-  "Influenza A (",   formatC(100.0 * mean(f_flua ), digits = 3),"%), \n",
+  "SARS-Cov2 (",     formatC(100.0 * mean(f_covid), digits = 3),"%), ",
+  "Influenza A (",   formatC(100.0 * mean(f_flua ), digits = 3),"%), ",
   "Hepatitus A (",   formatC(100.0 * mean(f_hepa ), digits = 3),"%), \n",
-  "HIV (",           formatC(100.0 * mean(f_hiv  ), digits = 3),"%), \n",
-  "humans (",        formatC(100.0 * mean(f_human), digits = 3),"%), \n",
-  "Mycobacterium (", formatC(100.0 * mean(f_myco ), digits = 3),"%), \n",
-  "Polio (",         formatC(100.0 * mean(f_polio), digits = 3),"%), \n",
+  "HIV (",           formatC(100.0 * mean(f_hiv  ), digits = 3),"%), ",
+  "humans (",        formatC(100.0 * mean(f_human), digits = 3),"%), ",
+  "Mycobacterium (", formatC(100.0 * mean(f_myco ), digits = 3),"%), ",
+  "Polio (",         formatC(100.0 * mean(f_polio), digits = 3),"%), ",
   "Rhinovirus (",    formatC(100.0 * mean(f_rhino), digits = 3),"%)"
 )
 p <- ggplot(t_tmh_binders, aes(x = haplotype, y = f_tmh, fill = target)) +
