@@ -34,7 +34,6 @@ shortest_index <- which(t_general$n_aas == min(t_general$n_aas))
 
 # Number of TMHs according to PureseqTM
 for (i in seq_len(nrow(t_general))) {
-  i <- shortest_index
   filename <- paste0(t_general$target[i], ".fasta")
   topology <- pureseqtmr::predict_topology(fasta_filename = filename)
   t_tmhs <- pureseqtmr::tally_tmhs(topology)
@@ -43,7 +42,6 @@ for (i in seq_len(nrow(t_general))) {
 
 # Number of TMHs according to TMHMM
 for (i in seq_len(nrow(t_general))) {
-  i <- shortest_index
   filename <- paste0(t_general$target[i], ".fasta")
   tmhmm_result <- tmhmm::run_tmhmm(fasta_filename = filename)
   df_tmhmm <- tmhmm::locatome_to_df(tmhmm_result)
