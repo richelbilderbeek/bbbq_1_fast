@@ -18,6 +18,10 @@ hepa & 1 & 2219 & 27 & 1.22\\
 \hline
 hepa & 2 & 2215 & 31 & 1.40\\
 \hline
+hiv & 1 & 3496 & 119 & 3.40\\
+\hline
+hiv & 2 & 3460 & 131 & 3.79\\
+\hline
 human & 1 & NA & NA & NA\\
 \hline
 human & 2 & NA & NA & NA\\

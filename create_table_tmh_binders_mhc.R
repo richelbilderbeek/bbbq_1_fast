@@ -49,7 +49,6 @@ t_raw <- readr::read_csv(
     n_spots_tmh = readr::col_double()
   )
 )
-
 # Create the BBBQ haplotype LUT
 haplotypes_filename <- "haplotypes_lut.csv"
 message("haplotypes_filename: '", haplotypes_filename, "'")
@@ -82,7 +81,6 @@ t_long <- t_long %>% dplyr::group_by(target, haplotype_id) %>%
       n_spots_tmh = sum(n_spots_tmh, na.rm = TRUE),
       .groups = "keep"
     ) %>% dplyr::ungroup()
-
 
 t_long$f <- 100.0 * t_long$n_binders_tmh / t_long$n_binders
 t_long$f <- paste0(

@@ -56,7 +56,6 @@ t_general <- readr::read_csv(
     n_aas = readr::col_double()
   )
 )
-t_general
 
 haplotype_lut_filename <- "haplotypes_lut.csv"
 message("'haplotype_lut_filename': '", haplotype_lut_filename, "'")
@@ -167,7 +166,7 @@ p + ggsave(target_filename, width = 7, height = 7)
 # Facet labels
 facet_labels <- paste0(
   t_general$english_name, "\n",
-  "TMHs: ", t_general$n_tmh_tmhmm, "/", t_general$n_tmh_pureseqtm, "\n",
+  "TMHs: ", t_general$n_tmh_pureseqtm, "\n",
   t_general$n_aas, " AAs"
 )
 names(facet_labels) <- t_general$target
@@ -177,7 +176,7 @@ p + facet_grid(
   target ~ ., scales = "free",
   labeller = ggplot2::as_labeller(facet_labels)
 ) + ggplot2::theme(strip.text.y.right = ggplot2::element_text(angle = 0)) +
-  ggplot2::theme(legend.position="none") +
+  ggplot2::theme(legend.position = "none") +
   ggsave(target_filename_grid, width = 7, height = 14)
 
 
@@ -254,9 +253,14 @@ p <- ggplot(
 p
 p + ggsave(target_virus_only_filename, width = 7, height = 7)
 
-p + facet_grid(target ~ ., scales = "free") +
+p + facet_grid(
+  target ~ ., scales = "free",
+  labeller = ggplot2::as_labeller(facet_labels)
+  ) +
+  ggplot2::theme(strip.text.y.right = ggplot2::element_text(angle = 0)) +
+  ggplot2::theme(legend.position = "none") +
   ggsave(target_virus_only_filename_grid, width = 7, height = 14)
-
+p
 
 ggplot(
   t_tmh_binders %>% filter(target %in% c("covid", "flua", "hepa", "hiv", "polio", "rhino")),
