@@ -10,14 +10,9 @@ t_general <- tibble::tibble(
 )
 
 # Names
-t_general$english_name[t_general$target == "covid"] <- "SARS-CoV-2"
-t_general$english_name[t_general$target == "flua"] <- "Influenza A"
-t_general$english_name[t_general$target == "hepa"] <- "Hepatitus A"
-t_general$english_name[t_general$target == "hiv"] <- "HIV"
-t_general$english_name[t_general$target == "human"] <- "Human"
-t_general$english_name[t_general$target == "myco"] <- "MTb"
-t_general$english_name[t_general$target == "polio"] <- "Polio"
-t_general$english_name[t_general$target == "rhino"] <- "Rhinovirus"
+for (i in seq_len(nrow(t_general)) {
+  t_general$english_name[i] <- get_target_english_name(t_general$target[i])
+}
 
 # Number of AAs
 for (i in seq_len(nrow(t_general))) {
