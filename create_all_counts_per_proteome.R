@@ -1,10 +1,5 @@
 # Create all counts
-args <- commandArgs(trailingOnly = TRUE)
-if (length(args) == 0) {
-  targets <- c("covid", "flua", "hepa", "hiv", "human", "myco", "polio", "rhino")
-} else {
-  targets <- args
-}
+targets <- bbbq::get_target_names()
 
 haplotype_lut_filename <- "haplotypes_lut.csv"
 testthat::expect_true(file.exists(haplotype_lut_filename))

@@ -1,5 +1,5 @@
 # Create the 'general.csv' file, containing general info
-targets <- c("covid", "flua", "hepa", "hiv", "human", "myco", "polio", "rhino")
+targets <- bbbq::get_target_names()
 
 t_general <- tibble::tibble(
   target = targets,

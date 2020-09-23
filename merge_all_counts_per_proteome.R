@@ -1,6 +1,6 @@
 # Merge all counts
 
-targets <- c("covid", "flua", "hepa", "hiv", "human", "myco", "polio", "rhino")
+targets <- bbbq::get_target_names()
 haplotype_lut_filename <- "haplotypes_lut.csv"
 testthat::expect_true(file.exists(haplotype_lut_filename))
 
