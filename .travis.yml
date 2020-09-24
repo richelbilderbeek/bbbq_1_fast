@@ -12,11 +12,15 @@ r_github_packages:
   - richelbilderbeek/peregrine
   - richelbilderbeek/beastier
   - richelbilderbeek/pureseqtmr
+  - richelbilderbeek/tmhmm
   - richelbilderbeek/mhcnuggetsr
   - richelbilderbeek/mhcnpreds
   - richelbilderbeek/netmhc2pan
   - richelbilderbeek/nmhc2ppreds
   - richelbilderbeek/bbbq
+
+bioc_packages:
+  - msa
 
 before_install:
   # Fix rJava error, from https://travis-ci.community/t/cannot-connect-to-java-from-r/9754/8
