@@ -12,7 +12,8 @@
 #
 #
 # Peregrine directives:
-#SBATCH --time=10:00:00
+#SBATCH --partition=vulture
+#SBATCH --time=9:59:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --ntasks=1

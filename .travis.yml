@@ -6,7 +6,7 @@ r_github_packages:
   - richelbilderbeek/epiprepreds
   - richelbilderbeek/beautier
   - richelbilderbeek/beastier
-  - richelbilderbeek/mcbette
+  - ropensci/mcbette
   - thijsjanzen/nodeSub
   - richelbilderbeek/pirouette
   - richelbilderbeek/peregrine
