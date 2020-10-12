@@ -5,7 +5,8 @@
 #
 #   sbatch run_r_script.sh my_r_script.R
 #
-#SBATCH --time=240:00:00
+#SBATCH --partition=vulture
+#SBATCH --time=9:59:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --ntasks=1
