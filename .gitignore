@@ -60,3 +60,7 @@ covid_binders.csv
 haplotypes_lut.csv
 counts.csv
 
+hiv_h*.csv
+rhino_h*.csv
+polio_h*.csv
+flua_h*.csv
