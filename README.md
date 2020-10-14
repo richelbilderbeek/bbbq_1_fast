@@ -135,4 +135,29 @@ Rscript create_table_tmh_binders_mhc.R mhc1
 Rscript create_table_tmh_binders_mhc.R mhc2
 ```
 
+## Figures
+
+![](fig_f_tmh_mhc1_grid.png)
+
+![](fig_f_tmh_mhc1_grid_virus_only.png)
+
+![](fig_f_tmh_mhc1_normalized.png)
+
+![](fig_f_tmh_mhc1_normalized_virus_only.png)
+
+![](fig_f_tmh_mhc1.png)
+
+![](fig_f_tmh_mhc1_virus_only.png)
+
+![](fig_f_tmh_mhc2_grid.png)
+
+![](fig_f_tmh_mhc2_grid_virus_only.png)
+
+![](fig_f_tmh_mhc2_normalized.png)
+
+![](fig_f_tmh_mhc2_normalized_virus_only.png)
+
+![](fig_f_tmh_mhc2.png)
+
+![](fig_f_tmh_mhc2_virus_only.png)
 
