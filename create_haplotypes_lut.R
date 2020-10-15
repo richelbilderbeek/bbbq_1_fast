@@ -14,7 +14,7 @@ message("'target_filename': ", target_filename)
 t <- bbbq::create_haplotypes_lut()
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) == 1 && args[1] == "test") {
+if (pureseqtmr::is_on_ci()) {
   t <- t[c(1, 2, 20, 21), ]
 }
 
