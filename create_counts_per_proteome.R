@@ -76,6 +76,12 @@ if (mhc_class == 1) {
 } else {
   stop("Unknown mhc_class: ", mhc_class)
 }
+if (pureseqtmr::is_on_ci()) {
+  if (ic50_prediction_tool == "netmhc2pan") {
+    ic50_prediction_tool <- "mhcnuggetsr"
+  }
+}
+
 message("ic50_prediction_tool: ", ic50_prediction_tool)
 
 t <- bbbq::predict_counts_per_proteome(
