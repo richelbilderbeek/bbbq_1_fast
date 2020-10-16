@@ -49,3 +49,13 @@ if (!file.exists(target_filename)) {
 }
 
 testthat::expect_true(file.exists(target_filename))
+
+if (pureseqtmr::is_on_ci()) {
+  # Only keep the first 2 lines on Travis
+  text <- readLines(target_filename)
+  shorter_text <- text[1:2]
+  writeLines(text = shorter_text, con = target_filename)
+}
+
+testthat::expect_true(file.exists(target_filename))
+
