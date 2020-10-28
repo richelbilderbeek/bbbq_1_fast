@@ -161,3 +161,7 @@ Rscript create_table_tmh_binders_mhc.R mhc2
 
 ![](fig_f_tmh_mhc2_virus_only.png)
 
+
+## Downloads
+
+ * [Pefect run for 2 percent](http://richelbilderbeek.nl/bbbq_1_fast_20201028.zip)
