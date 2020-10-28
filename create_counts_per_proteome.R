@@ -2,24 +2,38 @@
 #
 # Usage:
 #
-#   Rscript create_topology.R [target]
+#   Rscript create_counts_per_proteome.R [target] [haplotype id] [percentage]
 #
-# * [target]: either 'covid', 'human', 'myco'
+# * [target]: a target such as 'covid', 'human', 'myco'
+# * [haplotype id]: a haplotype ID such as 'h1', 'h2'
+# * [percentage]: a pecentage such as '2' (for 0.02).
+#                 Use percentages for filenames
 #
 # For example:
 #
-#   Rscript create_topology.R covid
+#   Rscript create_counts_per_proteome.R covid h1 5
 #
 library(testthat)
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) != 2) {
-  args <- c("covid", "h1")
-  args <- c("human", "h14")
-  args <- c("human", "h20")
+if (length(args) != 3) stop("")
+
+if (1 == 2) {
+  args <- c("covid", "h1", 5)
+  args <- c("human", "h14", 5)
+  args <- c("human", "h20", 5)
 }
 target <- args[1]
 haplotype_id <- args[2]
+percentage <- args[3]
+
+message("target: ", target)
+message("haplotype_id: ", haplotype_id)
+message("percentage: ", percentage)
+
+percentile <- percentage / 100.0
+message("percentile: ", percentile)
+
 
 haplotype_lut_filename <- "haplotypes_lut.csv"
 testthat::expect_true(file.exists(haplotype_lut_filename))
@@ -28,8 +42,9 @@ protein_lut_filename <- paste0(target, "_proteins_lut.csv")
 testthat::expect_true(file.exists(protein_lut_filename))
 
 target_filename <- paste0(
-  target, "_", haplotype_id, "_counts.csv"
+  target, "_", haplotype_id, "_", percentage, "_counts.csv"
 )
+message("target_filename: ", target_filename)
 
 # Look up peptide
 t_protein_lut <- readr::read_csv(
@@ -88,7 +103,7 @@ t <- bbbq::predict_counts_per_proteome(
   protein_sequences = protein_sequences,
   haplotype = haplotype,
   peptide_length = peptide_length,
-  percentile = bbbq::get_ic50_percentile_binder(),
+  percentile = percentile,
   verbose = FALSE,
   ic50_prediction_tool = ic50_prediction_tool
 )

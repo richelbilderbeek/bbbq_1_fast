@@ -13,6 +13,9 @@ t_haplotype_lut <- readr::read_csv(
   )
 )
 
+
+percentage <- 5 # use percentage values for filename
+
 call_cmd <- NA
 if (peregrine::is_on_peregrine()) {
   call_cmd <- c("sbatch", "run_r_script.sh")
@@ -26,13 +29,13 @@ for (i in seq_along(targets)) {
   for (haplotype_id in t_haplotype_lut$haplotype_id) {
 
     target_filename <- paste0(
-      target, "_", haplotype_id, "_counts.csv"
+      target, "_", haplotype_id, "_", percentage, "_counts.csv"
     )
     if (file.exists(target_filename)) {
       # message("Filename '", target_filename, "' already exists. Skip")
       next()
     }
-    cmds <- c(call_cmd, "create_counts_per_proteome.R", target, haplotype_id)
+    cmds <- c(call_cmd, "create_counts_per_proteome.R", target, haplotype_id, percentage)
     message(
       "Creating filename '", target_filename, "' with: ",
       paste0(cmds, " ")
