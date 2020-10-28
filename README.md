@@ -5,7 +5,8 @@ Branch |[![Travis CI logo](pics/TravisCI.png)](https://travis-ci.org)           
 master |[![Build Status](https://travis-ci.org/richelbilderbeek/bbbq_1_fast.svg?branch=master)](https://travis-ci.org/richelbilderbeek/bbbq_1_fast) |[![codecov.io](https://codecov.io/github/richelbilderbeek/bbbq_1_fast/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/bbbq_1_fast/branch/master)
 develop|[![Build Status](https://travis-ci.org/richelbilderbeek/bbbq_1_fast.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/bbbq_1_fast)|[![codecov.io](https://codecov.io/github/richelbilderbeek/bbbq_1_fast/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/bbbq_1_fast/branch/develop)
 
-The first sub-question of the Bianchi, Bilderbeek and Bogaart Question.
+A pipeline to answer the first sub-question of the 
+Bianchi, Bilderbeek and Bogaart Question.
 
  * :lock: [Full article](https://github.com/richelbilderbeek/bbbq_article)
 
@@ -27,8 +28,7 @@ Run this on Peregrine.
 
 Creates all:
 
- * `[target]_[haplotype_id]_ic50s.csv`
- * `[target]_topology.csv`
+ * `[target]_[haplotype_id]_[percentage]_counts.csv`
 
 #### `haplotypes_lut.csv`
 
