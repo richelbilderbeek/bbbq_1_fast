@@ -1,0 +1,110 @@
+# For help debugging build failures open an issue on the RStudio community with the 'github-actions' tag.
+# https://community.rstudio.com/new-topic?category=Package%20development&tags=github-actions
+on:
+  push:
+  pull_request:
+
+name: R-CMD-check
+
+jobs:
+  R-CMD-check:
+    strategy:
+      matrix:
+        include:
+          - install_tools: "true" 
+          - install_tools: "false"
+
+    runs-on: ubuntu-18.04
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@v1
+
+      - name: Install libgit2-dev
+        run: sudo apt install -qq libgit2-dev
+
+      - name: Install libcurl4-openssl-dev
+        run: sudo apt install -qq libcurl4-openssl-dev
+
+      - name: Fix rJava error # from https://travis-ci.community/t/cannot-connect-to-java-from-r/9754/8
+        run: sudo $(which R) CMD javareconf
+
+      - name: Install bios2mds prerequisite 'libglu1-mesa-dev'
+        run: sudo apt-get install libglu1-mesa-dev
+
+      - name: Install dependencies
+        run: |
+          install.packages(c("remotes", "rcmdcheck"))
+          remotes::install_github("richelbilderbeek/mhcnpreds")
+          remotes::install_github("richelbilderbeek/nmhc2ppreds")
+          remotes::install_github("jtextor/epitope-prediction")
+          remotes::install_github("richelbilderbeek/epiprepreds")
+          remotes::install_github("richelbilderbeek/cobaltr")
+          remotes::install_bioc("msa")
+          remotes::install_bioc("Biostrings")
+          remotes::install_github("richelbilderbeek/bbbq")
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("rcmdcheck")
+          remotes::install_cran("covr")
+          remotes::install_cran("lintr")
+          remotes::install_github("MangoTheCat/goodpractice")
+        shell: Rscript {0}
+
+      - name: Show tools
+        env:
+          INSTALL_TOOLS: ${{ matrix.install_tools }}
+        run: echo "$INSTALL_TOOLS"
+
+      - name: If statement on tools is true
+        env:
+          INSTALL_TOOLS: ${{ matrix.install_tools }}
+        run: if [[ "$INSTALL_TOOLS" == true ]]; then echo "Yay!"; fi
+
+      - name: Show location
+        run: pwd
+
+      - name: If statement on tools is false
+        env:
+          INSTALL_TOOLS: ${{ matrix.install_tools }}
+        run: if [[ "$INSTALL_TOOLS" == false ]]; then echo "Nay!"; fi
+
+      - name: Install tool 'tcsh'
+        env:
+          INSTALL_TOOLS: ${{ matrix.install_tools }}
+        run: if [[ "$INSTALL_TOOLS" == true ]]; then sudo apt install tcsh; fi
+
+      - name: Install tool 'MHCnuggets'
+        env:
+          INSTALL_TOOLS: ${{ matrix.install_tools }}
+        run: if [[ "$INSTALL_TOOLS" == true ]]; then Rscript -e 'mhcnuggetsr::install_mhcnuggets()'; fi
+
+      - name: Install tool 'PureseqTM'
+        env:
+          INSTALL_TOOLS: ${{ matrix.install_tools }}
+        run: if [[ "$INSTALL_TOOLS" == true ]]; then Rscript -e 'pureseqtmr::install_pureseqtm()'; fi
+
+      - name: Install tool 'NetMHCIIpan' if URL is valid
+        env:
+          INSTALL_TOOLS: ${{ matrix.install_tools }}
+        run: if [[ "$INSTALL_TOOLS" == true ]]; then Rscript -e 'if (netmhc2pan::is_url_valid()) netmhc2pan::install_netmhc2pan()'; fi
+
+      - name: Check
+        run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
+        shell: Rscript {0}
+
+      - name: Test coverage
+        run: if [[ "$INSTALL_TOOLS" == true ]]; then Rscript -e 'covr::codecov()'; fi
+
+      - name: Lint
+        run: if [[ "$INSTALL_TOOLS" == false ]]; then Rscript -e 'lintr::lint_package()'; fi
+
+      - name: Report mchnuggetsr
+        run: mhcnuggetsr::mhcnuggetsr_report()
+        shell: Rscript {0}
+
+      - name: Report mchnuggetsr
+        run: pureseqtmr::pureseqtmr_report()
+        shell: Rscript {0}
+
