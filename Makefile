@@ -158,10 +158,10 @@ table_f_tmh.latex:
 # Create the figures
 ################################################################################
 
-fig_f_tmh_mhc1.png: counts.csv
+fig_f_tmh_mhc1.png: counts.csv general.csv
 	Rscript create_figure.R mhc1
 
-fig_f_tmh_mhc2.png: counts.csv
+fig_f_tmh_mhc2.png: counts.csv general.csv
 	Rscript create_figure.R mhc2
 
 general.csv:
