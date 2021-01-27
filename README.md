@@ -164,4 +164,4 @@ Rscript create_table_tmh_binders_mhc.R mhc2
 
 ## Downloads
 
- * [Pefect run for 2 percent](http://richelbilderbeek.nl/bbbq_1_fast_20201028.zip)
+ * [Perfect run for 2 percent](http://richelbilderbeek.nl/bbbq_1_fast_20201028.zip)

@@ -39,7 +39,16 @@ shortest_index <- which(t_general$n_aas == min(t_general$n_aas))
 # Number of TMHs according to PureseqTM
 for (i in seq_len(nrow(t_general))) {
   filename <- paste0(t_general$target[i], ".fasta")
-  topology <- pureseqtmr::predict_topology(fasta_filename = filename)
+  if (t_general$target[i] == "human") {
+    # Use known topology file
+    topology <- bbbq::get_topology(proteome_type = "full", keep_selenoproteins = TRUE, topology_prediction_tool = "pureseqtmr")
+    testthat::expect_equal(names(topology), c("name", "sequence"))
+    names(topology) <- c("name", "topology")
+  } else {
+    # Predict de novo
+    topology <- pureseqtmr::predict_topology(fasta_filename = filename)
+  }
+  testthat::expect_equal(names(topology), c("name", "topology"))
   t_general$n_aas_tmh_pureseqtm[i] <- sum(
     stringr::str_count(topology$topology, "1")
   )
@@ -53,8 +62,17 @@ for (i in seq_len(nrow(t_general))) {
 # Number of TMHs according to TMHMM
 for (i in seq_len(nrow(t_general))) {
   filename <- paste0(t_general$target[i], ".fasta")
-  tmhmm_result <- tmhmm::run_tmhmm(fasta_filename = filename)
-  df_tmhmm <- tmhmm::locatome_to_df(tmhmm_result)
+  if (t_general$target[i] == "human") {
+    # Use known topology file
+    topology <- bbbq::get_topology(proteome_type = "full", keep_selenoproteins = FALSE, topology_prediction_tool = "tmhmm")
+    testthat::expect_equal(names(topology), c("name", "sequence"))
+    names(topology) <- c("name", "topology")
+  } else {
+    # Predict de novo
+    tmhmm_result <- tmhmm::run_tmhmm(fasta_filename = filename)
+    df_tmhmm <- tmhmm::locatome_to_df(tmhmm_result)
+  }
+  testthat::expect_equal(names(topology), c("name", "topology"))
   t_general$n_aas_tmh_tmhmm[i] <- sum(
     stringr::str_count(topology$topology, "1")
   )
