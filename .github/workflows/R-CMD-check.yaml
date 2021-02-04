@@ -100,11 +100,11 @@ jobs:
       - name: Lint
         run: if [[ "$INSTALL_TOOLS" == false ]]; then Rscript -e 'lintr::lint_package()'; fi
 
-      - name: Report mchnuggetsr
-        run: mhcnuggetsr::mhcnuggetsr_report()
-        shell: Rscript {0}
+#      - name: Report mchnuggetsr
+#        run: mhcnuggetsr::mhcnuggetsr_report()
+#        shell: Rscript {0}
 
-      - name: Report mchnuggetsr
-        run: pureseqtmr::pureseqtmr_report()
-        shell: Rscript {0}
+#      - name: Report pureseqtmr
+#        run: pureseqtmr::pureseqtmr_report()
+#        shell: Rscript {0}
 
