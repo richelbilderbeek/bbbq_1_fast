@@ -25,7 +25,7 @@ if (1 == 2) {
 }
 target <- args[1]
 haplotype_id <- args[2]
-percentage <- args[3]
+percentage <- as.numeric(args[3])
 
 message("target: ", target)
 message("haplotype_id: ", haplotype_id)
