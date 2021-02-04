@@ -39,7 +39,14 @@ shortest_index <- which(t_general$n_aas == min(t_general$n_aas))
 # Number of TMHs according to PureseqTM
 for (i in seq_len(nrow(t_general))) {
   filename <- paste0(t_general$target[i], ".fasta")
-  topology <- pureseqtmr::predict_topology(fasta_filename = filename)
+  topology <- bbbq::get_topology(
+    target_name = t_general$target[i],
+    proteome_type = "full",
+    keep_selenoproteins = FALSE,
+    topology_prediction_tool = "pureseqtmr"
+  )
+  names(topology) <- c("name", "topology")
+  testthat::expect_equal(names(topology), c("name", "topology"))
   t_general$n_aas_tmh_pureseqtm[i] <- sum(
     stringr::str_count(topology$topology, "1")
   )
@@ -53,15 +60,23 @@ for (i in seq_len(nrow(t_general))) {
 # Number of TMHs according to TMHMM
 for (i in seq_len(nrow(t_general))) {
   filename <- paste0(t_general$target[i], ".fasta")
-  tmhmm_result <- tmhmm::run_tmhmm(fasta_filename = filename)
-  df_tmhmm <- tmhmm::locatome_to_df(tmhmm_result)
+  topology <- bbbq::get_topology(
+    target_name = t_general$target[i],
+    proteome_type = "full",
+    keep_selenoproteins = FALSE,
+    topology_prediction_tool = "tmhmm"
+  )
+  names(topology) <- c("name", "topology")
+  testthat::expect_equal(names(topology), c("name", "topology"))
   t_general$n_aas_tmh_tmhmm[i] <- sum(
     stringr::str_count(topology$topology, "1")
   )
   t_general$n_aas_non_tmh_tmhmm[i] <- sum(
     stringr::str_count(topology$topology, "0")
   )
-  t_general$n_tmh_tmhmm[i] <- sum(tmhmm::tally_tmhs(df_tmhmm)$n_tmhs)
+
+  t_tmhs <- pureseqtmr::tally_tmhs(topology)
+  t_general$n_tmh_tmhmm[i] <- sum(t_tmhs$n_tmhs)
 }
 
-readr::write_csv(t_general, path = "general.csv")
+readr::write_csv(x = t_general, file = "general.csv")

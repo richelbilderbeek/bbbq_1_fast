@@ -13,7 +13,7 @@
 #
 library(dplyr, warn.conflicts = FALSE)
 library(testthat, warn.conflicts = FALSE)
-library(ggplot2)
+library(ggplot2, quietly = TRUE)
 
 args <- commandArgs(trailingOnly = TRUE)
 if (1 == 2) {
@@ -178,8 +178,6 @@ p + facet_grid(
 ) + ggplot2::theme(strip.text.y.right = ggplot2::element_text(angle = 0)) +
   ggplot2::theme(legend.position = "none") +
   ggsave(target_filename_grid, width = 7, height = 14)
-
-
 
 # Normalize
 t_tmh_binders$coincidence <- NA
